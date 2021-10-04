@@ -146,7 +146,7 @@ impl ClockId {
             not(any(target_env = "uclibc", target_env = "newlib")),
             any(
                 target_os = "emscripten",
-                all(target_os = "linux", target_env = "musl")
+                all(target_os = "linux", any(target_env = "musl", target_env = "fortanixvme"))
             )
         )
     ))]
@@ -157,7 +157,7 @@ impl ClockId {
             not(any(target_env = "uclibc", target_env = "newlib")),
             any(
                 target_os = "emscripten",
-                all(target_os = "linux", target_env = "musl")
+                all(target_os = "linux", any(target_env = "musl", target_env = "fortanixvme"))
             )
         )
     ))]

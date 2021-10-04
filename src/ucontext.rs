@@ -1,9 +1,9 @@
 use libc;
-#[cfg(not(target_env = "musl"))]
+#[cfg(not(any(target_env = "musl", target_env = "fortanixvme")))]
 use crate::Result;
-#[cfg(not(target_env = "musl"))]
+#[cfg(not(any(target_env = "musl", target_env = "fortanixvme")))]
 use crate::errno::Errno;
-#[cfg(not(target_env = "musl"))]
+#[cfg(not(any(target_env = "musl", target_env = "fortanixvme")))]
 use std::mem;
 use crate::sys::signal::SigSet;
 
@@ -13,7 +13,7 @@ pub struct UContext {
 }
 
 impl UContext {
-    #[cfg(not(target_env = "musl"))]
+    #[cfg(not(any(target_env = "musl", target_env = "fortanixvme")))]
     pub fn get() -> Result<UContext> {
         let mut context = mem::MaybeUninit::<libc::ucontext_t>::uninit();
         let res = unsafe { libc::getcontext(context.as_mut_ptr()) };
@@ -22,7 +22,7 @@ impl UContext {
         })
     }
 
-    #[cfg(not(target_env = "musl"))]
+    #[cfg(not(any(target_env = "musl", target_env = "fortanixvme")))]
     pub fn set(&self) -> Result<()> {
         let res = unsafe {
             libc::setcontext(&self.context as *const libc::ucontext_t)
