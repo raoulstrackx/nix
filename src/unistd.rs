@@ -971,6 +971,7 @@ pub enum Whence {
     /// some data, then the file offset is set to offset.
     #[cfg(any(target_os = "dragonfly", target_os = "freebsd",
           all(target_os = "linux", not(any(target_env = "musl",
+                                           target_env = "fortanixvme",
                                            target_arch = "mips",
                                            target_arch = "mips64")))))]
     SeekData = libc::SEEK_DATA,
@@ -981,6 +982,7 @@ pub enum Whence {
     /// is an implicit hole at the end of any file).
     #[cfg(any(target_os = "dragonfly", target_os = "freebsd",
           all(target_os = "linux", not(any(target_env = "musl",
+                                           target_env = "fortanixvme",
                                            target_arch = "mips",
                                            target_arch = "mips64")))))]
     SeekHole = libc::SEEK_HOLE

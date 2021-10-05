@@ -1,7 +1,7 @@
 use libc;
-#[cfg(not(target_env = "musl"))]
+#[cfg(not(any(target_env = "musl", target_env = "fortanixvme")))]
 use Result;
-#[cfg(not(target_env = "musl"))]
+#[cfg(not(any(target_env = "musl", target_env = "fortanixvme")))]
 use errno::Errno;
 use std::mem;
 use sys::signal::SigSet;
@@ -12,7 +12,7 @@ pub struct UContext {
 }
 
 impl UContext {
-    #[cfg(not(target_env = "musl"))]
+    #[cfg(not(any(target_env = "musl", target_env = "fortanixvme")))]
     pub fn get() -> Result<UContext> {
         let mut context: libc::ucontext_t = unsafe { mem::uninitialized() };
         let res = unsafe {
@@ -21,7 +21,7 @@ impl UContext {
         Errno::result(res).map(|_| UContext { context: context })
     }
 
-    #[cfg(not(target_env = "musl"))]
+    #[cfg(not(any(target_env = "musl", target_env = "fortanixvme")))]
     pub fn set(&self) -> Result<()> {
         let res = unsafe {
             libc::setcontext(&self.context as *const libc::ucontext_t)

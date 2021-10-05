@@ -1,7 +1,7 @@
 [package]
 name        = "nix"
 description = "Rust friendly bindings to *nix APIs"
-version     = "0.15.0"
+version     = "0.15.1"
 authors     = ["The nix-rust Project Developers"]
 repository  = "https://github.com/nix-rust/nix"
 license     = "MIT"
@@ -56,3 +56,6 @@ harness = false
 [[test]]
 name = "test-ptymaster-drop"
 path = "test/test_ptymaster_drop.rs"
+
+[patch.crates-io]
+libc = { git = "https://github.com/fortanix/libc.git", branch = "fortanixvme" }
